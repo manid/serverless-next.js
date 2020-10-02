@@ -25,7 +25,7 @@ describe("ServerlessNextJsPlugin", () => {
     `("should hook to $hook with method $method", ({ hook, method }) => {
       const spy = jest
         .spyOn(ServerlessNextJsPlugin.prototype, "hookWrapper")
-        .mockImplementation(() => {});
+        .mockImplementation(() => { });
       const plugin = new ServerlessPluginBuilder().build();
       plugin.hooks[hook]();
       expect(spy).toHaveBeenCalledWith(plugin[method]);
@@ -70,11 +70,12 @@ describe("ServerlessNextJsPlugin", () => {
       const plugin = pluginBuilder
         .withPluginConfig({
           routes: undefined,
-          uploadBuildAssets: undefined
+          uploadBuildAssets: undefined,
         })
         .build();
 
       expect(plugin.getPluginConfigValue("routes")).toEqual([]);
+      expect(plugin.getPluginConfigValue("excludeSourcemaps")).toEqual(false);
       expect(plugin.getPluginConfigValue("uploadBuildAssets")).toEqual(true);
     });
   });
